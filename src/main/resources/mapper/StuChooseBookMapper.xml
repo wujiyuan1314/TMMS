@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.StuChooseBookMapper">
+  <resultMap id="BaseResultMap" type="entity.StuChooseBook">
+    <id column="id" jdbcType="TINYINT" property="id" />
+    <result column="stu_id" jdbcType="TINYINT" property="stuId" />
+    <result column="book_id" jdbcType="TINYINT" property="bookId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updata_time" jdbcType="TIMESTAMP" property="updataTime" />
+    <result column="extend1" jdbcType="VARCHAR" property="extend1" />
+    <result column="extend2" jdbcType="VARCHAR" property="extend2" />
+    <result column="extend3" jdbcType="VARCHAR" property="extend3" />
+    <result column="extend4" jdbcType="VARCHAR" property="extend4" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, stu_id, book_id, create_time, updata_time, extend1, extend2, extend3, extend4
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stu_choose_book
+    where id = #{id,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stu_choose_book
+    where id = #{id,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="entity.StuChooseBook">
+    insert into stu_choose_book (id, stu_id, book_id, 
+      create_time, updata_time, extend1, 
+      extend2, extend3, extend4
+      )
+    values (#{id,jdbcType=TINYINT}, #{stuId,jdbcType=TINYINT}, #{bookId,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updataTime,jdbcType=TIMESTAMP}, #{extend1,jdbcType=VARCHAR}, 
+      #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="entity.StuChooseBook">
+    insert into stu_choose_book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stuId != null">
+        stu_id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updataTime != null">
+        updata_time,
+      </if>
+      <if test="extend1 != null">
+        extend1,
+      </if>
+      <if test="extend2 != null">
+        extend2,
+      </if>
+      <if test="extend3 != null">
+        extend3,
+      </if>
+      <if test="extend4 != null">
+        extend4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=TINYINT},
+      </if>
+      <if test="stuId != null">
+        #{stuId,jdbcType=TINYINT},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updataTime != null">
+        #{updataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null">
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null">
+        #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null">
+        #{extend4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.StuChooseBook">
+    update stu_choose_book
+    <set>
+      <if test="stuId != null">
+        stu_id = #{stuId,jdbcType=TINYINT},
+      </if>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updataTime != null">
+        updata_time = #{updataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null">
+        extend1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null">
+        extend3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null">
+        extend4 = #{extend4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.StuChooseBook">
+    update stu_choose_book
+    set stu_id = #{stuId,jdbcType=TINYINT},
+      book_id = #{bookId,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updata_time = #{updataTime,jdbcType=TIMESTAMP},
+      extend1 = #{extend1,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      extend3 = #{extend3,jdbcType=VARCHAR},
+      extend4 = #{extend4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=TINYINT}
+  </update>
+  <!-- 一下为自定义方法 -->
+  <select id="listStuChooseBook" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from stu_choose_book
+  	<where>
+  		<if test="stuChooseBook.stuId != null and !&quot;&quot;.equals(stuChooseBook.stuId.trim())">
+  			and stu_id = #{stuChooseBook.stuId}
+  		</if>
+  		<if test="stuChooseBook.bookId != null and !&quot;&quot;.equals(stuChooseBook.bookId.trim())">
+  			and book_id = #{stuChooseBook.bookId}
+  		</if>
+  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  	
+  </select>
+  
+  <select id="countStuChooseBook" resultType="int" parameterType="entity.StuChooseBook">
+  	select count(*) from stu_choose_book
+  	<where>
+  		<if test="stuId != null and !&quot;&quot;.equals(stuId.trim())">
+  			and stu_id = #{stuId}
+  		</if>
+  		<if test="bookId != null and !&quot;&quot;.equals(bookId.trim())">
+  			and book_id = #{bookId}
+  		</if>
+  	</where>
+  </select>
+</mapper>

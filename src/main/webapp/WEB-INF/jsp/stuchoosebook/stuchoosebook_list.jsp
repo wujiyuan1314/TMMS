@@ -45,7 +45,7 @@
 
 						<ul class="breadcrumb">
 							<li><i class="icon-home home-icon"></i> <a href="#">首页</a></li>
-							<li class="active">教材书目</li>
+							<li class="active">学生选书界面</li>
 						</ul>
 						<!-- .breadcrumb -->
 					</div>
@@ -58,7 +58,7 @@
 								<sf:form action="books" method="post" id="Paramform"
 									class="form-horizontal">
 									<input type="hidden" name="currentPage" id="currentPage" value="1" />
-									<div class=" col-xs-12 table-header">书籍列表</div>
+									<div class=" col-xs-12 table-header">选书列表</div>
 									<div class="form-group col-sm-2">
 										<label> 每页条数 <select name="pageNumber">
 												<option value="10"
@@ -73,26 +73,15 @@
 										</label>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-1 contorl-label text-right">ISBN编号</label>
-										<div class="col-sm-2">
-											<input type="text" class="col-xs-12" id="isbn"
-												name="bookIsbn" value="${bookInfo.bookIsbn }">
-										</div>
-
-										<label class="col-sm-1 text-right">书籍名称</label>
-										<div class="col-sm-2">
-											<input type="text" class="col-xs-12" name="bookName"
-												value="${bookInfo.bookName }">
-										</div>
 
 										<div class="col-sm-4">
 											<div id="dynamic-table_filter" class="dataTables_filter">
-												<a href="bookadd">
+												<a href="stuchoosebookadd">
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
 												</a>&nbsp;&nbsp; <a
-													href="booksdel">
+													href="stuchoosebooksdel">
 													<button class="btn btn-danger btn-sm">
 														<span class="icon-trash"></span>&nbsp;&nbsp;删除
 													</button>
@@ -101,24 +90,8 @@
 										</div>
 										
 										<div class="col-xs-12">
-											<label class="col-sm-1 contorl-label text-right">出版社</label> 
-											<div class="col-sm-2">
-												<input type="text" class="form-control input-sm" name="bookPublish" value="${bookInfo.bookPublish }">
-											</div> 
-											<label class="col-sm-1 text-right">作者</label> 
-											<div class="col-sm-2">
-												<input type="text" class="form-control input-sm" name="bookAuthor"
-													value="${bookInfo.bookAuthor }">
-											</div>
-											
 											<div class="col-sm-1">
 												<input type="button" id="books" value="查 询" />
-											</div>
-											<div class="col-sm-1">
-												<input type="button" id="bookaddbatch" value="导入" />
-											</div>
-											<div class="col-sm-1">
-												<input type="button" id="bookexport" value="导出" />
 											</div>
 										</div>
 									</div>
@@ -128,35 +101,28 @@
 											<thead>
 												<tr>
 													<th class="center"><input type="checkbox" id="all"
-														onclick="selectAll('bookId')" /></th>
+														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
-													<th>ISBN号</th>
-													<th>书名</th>
-													<th>出版社</th>
-													<th>作者</th>
-													<th>价格</th>
-													<th>操作</th>
+													<th>学生</th>
+													<th>所选书名</th>
 												</tr>
 											</thead>
 
 											<tbody>
-												<c:forEach items="${books}" var="book" varStatus="status">
+												<c:forEach items="${stuChooseBooks}" var="stuChooseBook" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="bookId" value="${book.id}" /></td>
+															name="Id" value="${stuChooseBook.id}" /></td>
 														<td>${status.index + 1}</td>
-														<td>${book.bookIsbn}</td>
-														<td>${book.bookName}</td>
-														<td>${book.bookPublish}</td>
-														<td>${book.bookAuthor}</td>
-														<td>${book.bookPrice}</td>
+														<td>${stuChooseBook.stuId}</td>
+														<td>${stuChooseBook.bookId}</td>
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> <a class="green" href="${book.id}/bookedit">修改<i
+																</a> <a class="green" href="${stuChooseBook.id}/stuchoosebookedit">修改<i
 																	class="icon-edit"></i>
-																</a> <a class="red" href="${book.id}/bookdel">删除<i
+																</a> <a class="red" href="${stuChooseBook.id}/stuchoosebookdel">删除<i
 																	class="icon-trash"></i>
 																</a>
 															</div>
