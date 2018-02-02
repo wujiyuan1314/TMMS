@@ -238,7 +238,6 @@
   			and book_author = #{bookInfo.bookAuthor}
   		</if>
   	</where>
-  	
   </select>
   
   <select id="countBook" resultType="int" parameterType="entity.BookInfo">

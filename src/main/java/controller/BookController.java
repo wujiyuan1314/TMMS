@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import entity.CodeLibrary;
 import service.BookService;
 import service.CodeLibraryService;
 import util.FileUploadUtils;
+import util.Function;
 import util.Page;
 
 @Controller
@@ -130,7 +132,7 @@ public class BookController {
         if(list.size()>0){
         	bookService.exportBook(list, response);
         }
-    	return "book/book_list";
+    	return null;
     }
    /**
     * 修改书籍信息
@@ -167,9 +169,15 @@ public class BookController {
       * @return
       */
 	@RequiresPermissions({"book:dels"})
-      @RequestMapping(value="/booksdel")
-  	public String delbooks(int ids[]){
-    	  bookService.deleteBooks(ids);
-  		return "book/book_list";
+	@RequestMapping(value="/dels")
+  	public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	int[] idArray1=new int[idArray.length];
+    	for(int i=0;i<idArray.length;i++){
+    		idArray1[i]=Function.getInt(idArray[i], 0);
+    	}
+    	bookService.deleteBooks(idArray1);;
+  		return "redirect:/book/books";
   	}
 }

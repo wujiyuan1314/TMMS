@@ -25,6 +25,7 @@ import service.CourseService;
 import service.CodeLibraryService;
 import util.DateUtil;
 import util.FileUploadUtils;
+import util.Function;
 import util.Page;
 
 @Controller
@@ -194,9 +195,15 @@ public class CourseController {
       * @return
       */
 	@RequiresPermissions({"course:dels"})
-      @RequestMapping(value="/coursesdel")
-  	public String delcourses(int ids[]){
-    	  courseService.deleteCourses(ids);
-  		return "course/course_list";
+	@RequestMapping(value="/dels")
+  	public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	int[] idArray1=new int[idArray.length];
+    	for(int i=0;i<idArray.length;i++){
+    		idArray1[i]=Function.getInt(idArray[i], 0);
+    	}
+    	courseService.deleteCourses(idArray1);;
+  		return "redirect:/book/books";
   	}
 }

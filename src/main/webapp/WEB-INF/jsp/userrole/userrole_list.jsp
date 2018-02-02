@@ -86,12 +86,9 @@
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
-												</a>&nbsp;&nbsp; <a
-													href="userrolesdel">
-													<button class="btn btn-danger btn-sm">
-														<span class="icon-trash"></span>&nbsp;&nbsp;删除
-													</button>
-												</a>
+												</a>&nbsp;&nbsp;  <button class="btn btn-danger btn-sm" onclick="batchDelete('userrole');">
+													<span class="icon-trash"></span>&nbsp;&nbsp;删除
+												</button>
 											</div>
 										</div>
 										
@@ -108,7 +105,7 @@
 											<thead>
 												<tr>
 													<th class="center"><input type="checkbox" id="all"
-														onclick="selectAll('userroleId')" /></th>
+														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
 													<th>角色名</th>
 													<th>描述</th>
@@ -121,7 +118,7 @@
 												<c:forEach items="${userroles}" var="userrole" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="id" value="${userrole.id}" /></td>
+															name="Id" value="${userrole.id}" /></td>
 														<td>${status.index + 1}</td>
 														<td>${userrole.roleName}</td>
 														<td>${userrole.roleDescription}</td>

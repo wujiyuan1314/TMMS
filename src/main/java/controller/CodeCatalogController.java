@@ -136,10 +136,12 @@ public class CodeCatalogController {
       * @return
       */
 	@RequiresPermissions({"codeCatalog:dels"})
-      @RequestMapping(value="/codeCatalogsdel")
-  	public String delcodeCatalogs(String ids[]){
-    	  codeCatalogService.deleteCodeCatalogs(ids);
-  		return "codecatalog/codecatalog_list";
+	@RequestMapping(value="/dels")
+  	public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	codeCatalogService.deleteCodeCatalogs(idArray);;
+  		return "redirect:/class/classs";
   	}
       @RequestMapping(value="/{codeno}/codelibrarylist")
     public String selectCodeLibraryByCodeno(@PathVariable String codeno,Model model){

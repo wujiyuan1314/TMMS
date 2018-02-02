@@ -20,17 +20,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import entity.CodeLibrary;
-import entity.CollegeInfo;
 import entity.StudentInfo;
 import service.CodeLibraryService;
 import service.CollegeService;
 import service.StudentService;
 import util.DateUtil;
 import util.FileUploadUtils;
+import util.Function;
 import util.Page;
 
 @Controller
-@RequestMapping("/stu")
+@RequestMapping("/student")
 public class StudentController {
 	public static Logger logger = Logger.getLogger(StudentController.class);
 	
@@ -48,10 +48,8 @@ public class StudentController {
 	 * @param request
 	 * @return
 	 */
-	@RequiresPermissions({"student:view"})
 	@RequestMapping(value="/students")
 	public String listStudent(Model model, @ModelAttribute StudentInfo studentInfo, @ModelAttribute Page page, HttpServletRequest request) {
-		
 		String currentPageStr = request.getParameter("currentPage");
 		logger.info(currentPageStr + "===========");
 		if(currentPageStr != null){
@@ -156,7 +154,7 @@ public class StudentController {
         if(list.size()>0){
         	studentService.exportStudent(list, response);
         }
-    	return "student/stu_list";
+    	return null;
     }
    /**
     * 修改学生信息
@@ -171,6 +169,10 @@ public class StudentController {
 		List<CodeLibrary> listgrade=codeLibraryService.selectByCodeNo("GRADE");//年级列表
 		model.addAttribute("sexs",listsex);
 		model.addAttribute("grades",listgrade);
+		StudentInfo studentInfo1=studentService.selectByStuNo(studentInfo.getStudentNo());
+		if(studentInfo1!=null){
+			br.rejectValue("studentNo", "HSAEXIST", "该学号已存在");
+		}
     	if(br.hasErrors()){
     		return "student/student_edit";
     	}
@@ -195,9 +197,15 @@ public class StudentController {
       * @return
       */
     @RequiresPermissions({"student:dels"})
-      @RequestMapping(value="/studentsdel")
-  	public String delStudents(int ids[]){
-    	  studentService.deleteStudents(ids);
-  		return "student/student_list";
+    @RequestMapping(value="/dels")
+  	public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	int[] idArray1=new int[idArray.length];
+    	for(int i=0;i<idArray.length;i++){
+    		idArray1[i]=Function.getInt(idArray[i], 0);
+    	}
+    	studentService.deleteStudents(idArray1);;
+  		return "redirect:/book/books";
   	}
 }

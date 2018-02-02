@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import entity.ClassInfo;
 import entity.CodeLibrary;
-import entity.StudentInfo;
 import net.sf.json.JSONArray;
 import service.ClassService;
 import service.CodeLibraryService;
@@ -179,10 +178,12 @@ public class ClassController {
       * @return
       */
 	@RequiresPermissions({"class:dels"})
-      @RequestMapping(value="/classsdel")
-  	public String delClasss(String ids[]){
-    	  classService.deleteClasss(ids);
-  		return "class/class_list";
+	@RequestMapping(value="/dels")
+  	public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	classService.deleteClasss(idArray);;
+  		return "redirect:/class/classs";
   	}
       /**
        * 按照specialtyid查找班级

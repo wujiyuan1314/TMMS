@@ -130,26 +130,32 @@
 											<div class="col-sm-1">
 												<input type="button" id="students" value="查 询" />
 											</div>
+											<shiro:hasPermission name="student:addbatch">
 											<div class="col-sm-1">
 												<input type="button" id="studentaddbatch" value="导入" />
 											</div>
+											</shiro:hasPermission>
+											<shiro:hasPermission name="student:export">
 											<div class="col-sm-1">
 												<input type="button" id="studentexport" value="导出" />
 											</div>
+											</shiro:hasPermission>
 										</div>
 										
 										<div class="col-sm-4">
 											<div id="dynamic-table_filter" class="dataTables_filter">
+												<shiro:hasPermission name="student:add">
 												<a href="studentadd">
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
-												</a>&nbsp;&nbsp; <a
-													href="studentsdel">
-													<button class="btn btn-danger btn-sm">
-														<span class="icon-trash"></span>&nbsp;&nbsp;删除
-													</button>
-												</a>
+												</a>&nbsp;&nbsp;
+												</shiro:hasPermission>
+												<shiro:hasPermission name="student:dels">
+												 <button class="btn btn-danger btn-sm" onclick="batchDelete('student');">
+													<span class="icon-trash"></span>&nbsp;&nbsp;删除
+												</button>
+												</shiro:hasPermission>
 											</div>
 										</div>
 									</div>
@@ -159,7 +165,7 @@
 											<thead>
 												<tr>
 													<th class="center"><input type="checkbox" id="all"
-														onclick="selectAll('studentId')" /></th>
+														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
 													<th>学号</th>
 													<th>姓名</th>
@@ -180,7 +186,7 @@
 												<c:forEach items="${students}" var="student" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="id" value="${student.id}" /></td>
+															name="Id" value="${student.id}" /></td>
 														<td>${status.index + 1}</td>
 														<td>${student.studentNo}</td>
 														<td>${student.studentName}</td>
@@ -197,11 +203,17 @@
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> <a class="green" href="${student.id}/studentedit">修改 <i
+																</a>
+																<shiro:hasPermission name="student:edit">
+																 <a class="green" href="${student.id}/studentedit">修改 <i
 																	class="icon-edit"></i>
-																</a> <a class="red" href="${student.id}/studentdel">删除 <i
+																</a>
+																</shiro:hasPermission>
+																<shiro:hasPermission name="student:del">
+																 <a class="red" href="${student.id}/studentdel">删除 <i
 																	class="icon-trash"></i>
 																</a>
+																</shiro:hasPermission>
 															</div>
 														</td>
 													</tr>

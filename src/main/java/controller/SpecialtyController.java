@@ -166,11 +166,13 @@ public class SpecialtyController {
       * @return
       */
 	@RequiresPermissions({"specialty:dels"})
-      @RequestMapping(value="/specialtysdel")
-  	public String delSpecialtys(String ids[]){
-    	  specialtyService.deleteSpecialtys(ids);
-  		return "specialty/specialty_list";
-  	}
+	@RequestMapping(value="/dels")
+  	 public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	specialtyService.deleteSpecialtys(idArray);;
+  		return "redirect:/book/books";
+  	 }
     /**
      * 根据collegeId选择专业
      * @param request

@@ -17,10 +17,25 @@ function deleteOneConfirm(){
  * 批量删除信息
  */
 function batchDelete(obj) {
-	var r = confirm("所选的所有院系都将被删除，确定要删除吗？");
+	var r = confirm("确定要删除吗？");
 	if(r == true) {
-		document.forms[0].action = obj;
-		document.forms[0].submit();
+		var ids="";
+		$("input[name='Id']:checked").each(function() {
+              if(ids==''){
+            	  ids+=$(this).val();  
+              }else{
+            	  ids+=","+$(this).val(); 
+              }
+	    });
+		if(ids==""){
+			alert("请至少选择一条数据");
+			return;
+		}
+		var url=basePath+obj+"/dels";
+		var params={ids:ids};
+		$.post(url,params,function(res){
+			window.location.reload();
+		});
 	}
 }
 

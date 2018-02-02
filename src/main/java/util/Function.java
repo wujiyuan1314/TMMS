@@ -37,6 +37,7 @@ public static String getDefaultStr(Object obj,String val){
 		return result;
 	}
 }
+
 //把对象转化为整数，非整数则返回defaultNum
 public static int getInt(Object obj,int defaultNum){
 	String value=ClearTrim(obj);

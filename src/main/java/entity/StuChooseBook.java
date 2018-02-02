@@ -3,11 +3,20 @@ package entity;
 import java.util.Date;
 
 public class StuChooseBook {
-    private Byte id;
+    @Override
+	public String toString() {
+		return "StuChooseBook [id=" + id + ", stuId=" + stuId + ", bookId=" + bookId + ", createTime=" + createTime
+				+ ", updataTime=" + updataTime + ", extend1=" + extend1 + ", extend2=" + extend2 + ", extend3="
+				+ extend3 + ", extend4=" + extend4 + ", classId=" + classId + ", specialtyId=" + specialtyId
+				+ ", collegeId=" + collegeId + ", extend5=" + extend5 + ", extend6=" + extend6 + ", extend7=" + extend7
+				+ ", extend8=" + extend8 + "]";
+	}
 
-    private Byte stuId;
+	private Integer id;
 
-    private Byte bookId;
+    private Integer stuId;
+
+    private Integer bookId;
 
     private Date createTime;
 
@@ -21,27 +30,41 @@ public class StuChooseBook {
 
     private String extend4;
 
-    public Byte getId() {
+    private String classId;
+
+    private String specialtyId;
+
+    private String collegeId;
+
+    private String extend5;
+
+    private String extend6;
+
+    private String extend7;
+
+    private String extend8;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Byte id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Byte getStuId() {
+    public Integer getStuId() {
         return stuId;
     }
 
-    public void setStuId(Byte stuId) {
+    public void setStuId(Integer stuId) {
         this.stuId = stuId;
     }
 
-    public Byte getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
-    public void setBookId(Byte bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
@@ -91,5 +114,61 @@ public class StuChooseBook {
 
     public void setExtend4(String extend4) {
         this.extend4 = extend4 == null ? null : extend4.trim();
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId == null ? null : classId.trim();
+    }
+
+    public String getSpecialtyId() {
+        return specialtyId;
+    }
+
+    public void setSpecialtyId(String specialtyId) {
+        this.specialtyId = specialtyId == null ? null : specialtyId.trim();
+    }
+
+    public String getCollegeId() {
+        return collegeId;
+    }
+
+    public void setCollegeId(String collegeId) {
+        this.collegeId = collegeId == null ? null : collegeId.trim();
+    }
+
+    public String getExtend5() {
+        return extend5;
+    }
+
+    public void setExtend5(String extend5) {
+        this.extend5 = extend5 == null ? null : extend5.trim();
+    }
+
+    public String getExtend6() {
+        return extend6;
+    }
+
+    public void setExtend6(String extend6) {
+        this.extend6 = extend6 == null ? null : extend6.trim();
+    }
+
+    public String getExtend7() {
+        return extend7;
+    }
+
+    public void setExtend7(String extend7) {
+        this.extend7 = extend7 == null ? null : extend7.trim();
+    }
+
+    public String getExtend8() {
+        return extend8;
+    }
+
+    public void setExtend8(String extend8) {
+        this.extend8 = extend8 == null ? null : extend8.trim();
     }
 }

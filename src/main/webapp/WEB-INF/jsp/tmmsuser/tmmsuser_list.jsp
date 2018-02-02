@@ -96,12 +96,9 @@
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
-												</a>&nbsp;&nbsp; <a
-													href="tmmsusersdel">
-													<button class="btn btn-danger btn-sm">
-														<span class="icon-trash"></span>&nbsp;&nbsp;删除
-													</button>
-												</a>
+												</a>&nbsp;&nbsp; <button class="btn btn-danger btn-sm" onclick="batchDelete('tmmsuser');">
+													<span class="icon-trash"></span>&nbsp;&nbsp;删除
+												</button>
 											</div>
 										</div>
 										
@@ -124,7 +121,7 @@
 											<thead>
 												<tr>
 													<th class="center"><input type="checkbox" id="all"
-														onclick="selectAll('tmmsuserId')" /></th>
+														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
 													<th>用户名</th>
 													<th>所属角色</th>
@@ -137,17 +134,20 @@
 												<c:forEach items="${tmmsusers}" var="tmmsuser" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="id" value="${tmmsuser.id}" /></td>
+															name="Id" value="${tmmsuser.id}" /></td>
 														<td>${status.index + 1}</td>
 														<td>${tmmsuser.username}</td>
-														<td> 
+														<td>
 															<c:forEach items="${userroles}" var="userrole" varStatus="status">
 															 <c:if test="${userrole.id==tmmsuser.roleId }">
 														        ${userrole.roleName }
 														    </c:if>
 															</c:forEach>
 														</td>
-														<td>${tmmsuser.state}</td>
+														<td>
+														  <c:if test="${tmmsuser.state==1}">有效</c:if>
+														  <c:if test="${tmmsuser.state==0}">无效</c:if>
+														</td>
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i

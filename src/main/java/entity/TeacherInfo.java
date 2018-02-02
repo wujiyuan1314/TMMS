@@ -7,7 +7,15 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class TeacherInfo {
-    private Integer id;
+    @Override
+	public String toString() {
+		return "TeacherInfo [id=" + id + ", teacherNo=" + teacherNo + ", teacherName=" + teacherName + ", teacherSex="
+				+ teacherSex + ", mobile=" + mobile + ", teacherPwd=" + teacherPwd + ", collegeId=" + collegeId
+				+ ", technicalTitle=" + technicalTitle + ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", state=" + state + ", extend1=" + extend1 + ", extend2=" + extend2 + ", extend3=" + extend3 + "]";
+	}
+
+	private Integer id;
 
     private String teacherNo;
 

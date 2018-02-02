@@ -30,7 +30,7 @@ public class StudentInfo {
     private String specialtyId;
 
     private String collegeId;
-    
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date enterTime;
 
@@ -38,7 +38,7 @@ public class StudentInfo {
 
     private BigDecimal initialAmount;
 
-    private Byte state;
+    private String state;
 
     private Date createTime;
 
@@ -134,7 +134,7 @@ public class StudentInfo {
     public Date getEnterTime() {
         return enterTime;
     }
-   
+
     public void setEnterTime(Date enterTime) {
         this.enterTime = enterTime;
     }
@@ -156,19 +156,29 @@ public class StudentInfo {
         this.initialAmount = initialAmount;
     }
 
-    public Byte getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Byte state) {
-        this.state = state;
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
     }
 
     public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    @Override
+	public String toString() {
+		return "StudentInfo [id=" + id + ", studentNo=" + studentNo + ", studentName=" + studentName + ", studentSex="
+				+ studentSex + ", mobile=" + mobile + ", studentPwd=" + studentPwd + ", studentGrade=" + studentGrade
+				+ ", classId=" + classId + ", specialtyId=" + specialtyId + ", collegeId=" + collegeId + ", enterTime="
+				+ enterTime + ", payStatus=" + payStatus + ", initialAmount=" + initialAmount + ", state=" + state
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime + ", extend1=" + extend1 + ", extend2="
+				+ extend2 + ", extend3=" + extend3 + "]";
+	}
+
+	public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

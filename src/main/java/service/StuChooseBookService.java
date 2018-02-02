@@ -1,6 +1,10 @@
 package service;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import entity.CodeLibrary;
 import entity.StuChooseBook;
 import util.Page;
 
@@ -40,4 +44,31 @@ public interface StuChooseBookService {
 	 * @return
 	 */
 	StuChooseBook getStuChooseBookByID(int id);
+	/**
+	 * 判断该名学生是否选过该书
+	 * @param stuId
+	 * @param bookId
+	 * @return
+	 */
+	StuChooseBook selectByStuBook(int stuId,int bookId);
+	/**
+	 * 批量导出学生选书信息
+	 * @param list
+	 * @param response
+	 */
+	void exportSCB(List<StuChooseBook> list,HttpServletResponse response);
+	/**
+	 * 按条件查找全部
+	 * @param stuId
+	 * @param bookId
+	 * @return
+	 */
+	List<StuChooseBook> selectByParams(StuChooseBook stuChooseBook);
+	/**
+	 * 查找某一学校的选书信息
+	 * @param stuId
+	 * @param bookId
+	 * @return
+	 */
+	List<Map<String, Object>> selectBySchool(CodeLibrary codeLibrary);
 }

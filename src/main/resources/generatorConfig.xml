@@ -36,7 +36,7 @@
     </javaClientGenerator> 
         
     <!-- 用户表 -->  
-    <table schema="t" tableName="stu_choose_book" domainObjectName="StuChooseBook"  
+    <table schema="t" tableName="student_info" domainObjectName="StudentInfo"  
         enableCountByExample="false"  
         enableUpdateByExample="false"  
         enableDeleteByExample="false"  

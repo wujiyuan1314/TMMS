@@ -26,6 +26,10 @@
 
 				<div class="navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
+						<li><a>
+								<i class="icon-user"></i>	欢迎您：<%=user.getUsername() %>
+							</a>
+						</li>
 						
 						<li>
 							<a href="<%=request.getContextPath() %>/tmmsuser/<%=m%>/tmmsuserinfo">
@@ -34,7 +38,7 @@
 						</li>
 
 						<li>
-							<a href="#">
+							<a href="<%=request.getContextPath() %>/tmmsuser/<%=m%>/editpwd">
 								<i class="icon-lock"></i>修改密码
 							</a>
 						</li>

@@ -23,8 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.StudentInfoMapper;
-import entity.BookInfo;
+import dao.TmmsUserMapper;
 import entity.StudentInfo;
+import entity.TmmsUser;
 import exception.ExcelException;
 import service.StudentService;
 import util.DateUtil;
@@ -35,6 +36,8 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	StudentInfoMapper studentInfoMapper;
+	@Autowired
+	TmmsUserMapper tmmsUserMapper;
 	/**
 	 * 根据输入信息条件查询学生列表，并分页显示
 	 * @param bookInfo
@@ -106,7 +109,7 @@ public class StudentServiceImpl implements StudentService {
 	                            	}else if(j==11){//初始缴费金额
 	                            		studentInfo.setInitialAmount(BigDecimal.valueOf(Double.parseDouble(value.substring(0,value.indexOf(".")))));
 	                            	}else if(j==12){//状态(0:在校 1:毕业)
-	                            		studentInfo.setState(Byte.valueOf(value));
+	                            		studentInfo.setState(value);
 	                            	}
 	                                break;   
 	                            case HSSFCell.CELL_TYPE_STRING: // 字符串
@@ -137,7 +140,7 @@ public class StudentServiceImpl implements StudentService {
 	                            	}else if(j==11){//初始缴费金额
 	                            		studentInfo.setInitialAmount(BigDecimal.valueOf(Double.parseDouble(value2)));
 	                            	}else if(j==12){//状态(0:在校 1:毕业)
-	                            		studentInfo.setState(Byte.valueOf(value2));
+	                            		studentInfo.setState(value2);
 	                            	}
 	                                break; 
 	                            case HSSFCell.CELL_TYPE_BOOLEAN: // Boolean   
@@ -174,6 +177,17 @@ public class StudentServiceImpl implements StudentService {
 			e.printStackTrace();
 		} finally{
 			if(list.size()>0){
+				for(StudentInfo studentInfo:list){
+					TmmsUser tmmsUser=new TmmsUser();
+					tmmsUser.setUsername(studentInfo.getStudentNo());
+					tmmsUser.setPassword("123456");
+					tmmsUser.setState((byte)1);
+					tmmsUser.setRoleId(1);
+					Date createtime=DateUtil.parseDateTime(DateUtil.getCurrentDateTimeStr());//创建时间
+					tmmsUser.setCreateTime(createtime);
+					tmmsUser.setUpdateTime(createtime);
+					tmmsUserMapper.insert(tmmsUser);
+				}
 				studentInfoMapper.insertStudentInfoBatch(list);//批量插入数据
 			}
 		}
@@ -184,7 +198,15 @@ public class StudentServiceImpl implements StudentService {
 	 */
 	@Override
 	public int insertStudent(StudentInfo studentInfo) {
-		// TODO Auto-generated method stub
+		TmmsUser tmmsUser=new TmmsUser();
+		tmmsUser.setUsername(studentInfo.getStudentNo());
+		tmmsUser.setPassword("123456");
+		tmmsUser.setState((byte)1);
+		tmmsUser.setRoleId(1);
+		Date createtime=DateUtil.parseDateTime(DateUtil.getCurrentDateTimeStr());//创建时间
+		tmmsUser.setCreateTime(createtime);
+		tmmsUser.setUpdateTime(createtime);
+		tmmsUserMapper.insert(tmmsUser);
 		return studentInfoMapper.insertSelective(studentInfo);
 
 	}
@@ -314,5 +336,8 @@ public class StudentServiceImpl implements StudentService {
 			e.printStackTrace();
 		}
 	}
-	 
+	@Override
+	public StudentInfo selectByStuNo(String studentNo){
+		return studentInfoMapper.selectByStuNo(studentNo);
+	}
 }

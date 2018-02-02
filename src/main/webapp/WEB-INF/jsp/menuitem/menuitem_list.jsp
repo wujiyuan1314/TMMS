@@ -101,7 +101,7 @@
 												<thead>
 													<tr>
 														<th class="center"><input type="checkbox" id="all"
-															onclick="selectAll('collegeId')" /></th>
+															onclick="selectAll('Id')" /></th>
 														<th>序号</th>
 														<th>菜单名</th>
 														<th>上级菜单</th>
@@ -115,7 +115,7 @@
 													<c:forEach items="${menuitems}" var="menuitem" varStatus="status">
 														<tr>
 															<td class="center"><input type="checkbox"
-																name="id" value="${menuitem.id}" /></td>
+																name="ID" value="${menuitem.id}" /></td>
 															<td>${status.index + 1}</td>
 															<td>${menuitem.menuName}</td>
 															<td>${menuitem.parentId}</td>

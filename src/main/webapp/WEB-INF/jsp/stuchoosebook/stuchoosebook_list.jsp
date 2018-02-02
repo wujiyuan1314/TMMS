@@ -55,45 +55,37 @@
 						<div class="row">
 							<div class="col-xs-12">
 
-								<sf:form action="books" method="post" id="Paramform"
+								<sf:form action="stuchoosebooks" method="post" id="Paramform"
 									class="form-horizontal">
 									<input type="hidden" name="currentPage" id="currentPage" value="1" />
 									<div class=" col-xs-12 table-header">选书列表</div>
-									<div class="form-group col-sm-2">
-										<label> 每页条数 <select name="pageNumber">
-												<option value="10"
-													<c:if test="${page.pageNumber == 10}"> selected="selected"</c:if>>10</option>
-												<option value="25"
-													<c:if test="${page.pageNumber == 25}"> selected="selected"</c:if>>25</option>
-												<option value="50"
-													<c:if test="${page.pageNumber == 50}"> selected="selected"</c:if>>50</option>
-												<option value="100"
-													<c:if test="${page.pageNumber == 100}"> selected="selected"</c:if>>100</option>
-										</select>
-										</label>
-									</div>
 									<div class="form-group">
 
-										<div class="col-sm-4">
-											<div id="dynamic-table_filter" class="dataTables_filter">
-												<a href="stuchoosebookadd">
-													<button type="button" class="btn btn-success btn-sm">
-														<span class="icon-plus"></span>&nbsp;&nbsp;新增
-													</button>
-												</a>&nbsp;&nbsp; <a
-													href="stuchoosebooksdel">
-													<button class="btn btn-danger btn-sm">
-														<span class="icon-trash"></span>&nbsp;&nbsp;删除
-													</button>
-												</a>
-											</div>
+										<label class="col-sm-1 text-right">学院</label> 
+										<div class="col-sm-2">
+											 <select name="collegeId" id="collegeId">
+								            <select>
 										</div>
-										
-										<div class="col-xs-12">
+										<label class="col-sm-1 text-right">专业</label> 
+										<div class="col-sm-2">
+											 <select name="specialtyId" id="specialtyId">
+								            <select>
+										</div>
+										<label class="col-sm-1 text-right">班级</label> 
+										<div class="col-sm-2">
+											 <select name="classId" id="classId">
+								            <select>
+										</div>
+										 <div class="col-xs-12">
+										    <div class="col-sm-1">
+												<input type="button" id="stuchoosebooks" value="查 询" />
+											</div>
+											<shiro:hasPermission name="stuchoosebook:export">
 											<div class="col-sm-1">
-												<input type="button" id="books" value="查 询" />
+												<input type="button" id="stuchoosebookexport" value="导出" />
 											</div>
-										</div>
+											</shiro:hasPermission>
+									     </div>
 									</div>
 
 									<table id="dynamic-table"
@@ -105,6 +97,10 @@
 													<th>序号</th>
 													<th>学生</th>
 													<th>所选书名</th>
+													<th>院系</th>
+													<th>专业</th>
+													<th>班级</th>
+													<th>操作</th>
 												</tr>
 											</thead>
 
@@ -114,15 +110,16 @@
 														<td class="center"><input type="checkbox"
 															name="Id" value="${stuChooseBook.id}" /></td>
 														<td>${status.index + 1}</td>
-														<td>${stuChooseBook.stuId}</td>
-														<td>${stuChooseBook.bookId}</td>
+														<td>${stuChooseBook.extend2}</td>
+														<td>${stuChooseBook.extend1}</td>
+														<td>${stuChooseBook.extend3}</td>
+														<td>${stuChooseBook.extend4}</td>
+														<td>${stuChooseBook.extend5}</td>
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> <a class="green" href="${stuChooseBook.id}/stuchoosebookedit">修改<i
-																	class="icon-edit"></i>
-																</a> <a class="red" href="${stuChooseBook.id}/stuchoosebookdel">删除<i
+																</a>  <a class="red" href="${stuChooseBook.id}/stuchoosebookdel">删除<i
 																	class="icon-trash"></i>
 																</a>
 															</div>
@@ -187,6 +184,7 @@
 	<!-- /.main-container -->
 
 	<%@ include file="../common/common-js.jsp"%>
+	<script src="<%=basePath2 %>resources/js/common/common_list.js"></script>
 </body>
 </html>
 

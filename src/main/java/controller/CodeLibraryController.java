@@ -128,9 +128,11 @@ public class CodeLibraryController {
       * @return
       */
 	@RequiresPermissions({"codeLibrary:dels"})
-      @RequestMapping(value="/codeLibrarysdel")
-  	public String delcodeLibrarys(String ids[]){
-    	  codeLibraryService.deleteCodeLibrarys(ids);
-  		return "codelibrary/codelibrary_list";
+	@RequestMapping(value="/dels")
+  	public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	codeLibraryService.deleteCodeLibrarys(idArray);
+  		return "redirect:/class/classs";
   	}
 }

@@ -3,9 +3,7 @@ package service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -23,7 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.TeacherInfoMapper;
+import dao.TmmsUserMapper;
+import entity.StudentInfo;
 import entity.TeacherInfo;
+import entity.TmmsUser;
 import exception.ExcelException;
 import service.TeacherService;
 import util.DateUtil;
@@ -34,6 +35,8 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Autowired
 	TeacherInfoMapper teacherInfoMapper;
+	@Autowired
+	TmmsUserMapper tmmsUserMapper;
 	/**
 	 * 根据输入信息条件查询教师信息列表，并分页显示
 	 * @param teacherInfo
@@ -191,6 +194,17 @@ public class TeacherServiceImpl implements TeacherService {
 			teacherinfo.setUpdateTime(createtime);//更新时间(刚导入时创建时间和更新时间一致)
 		}
 		if(list.size()>0){
+			for(TeacherInfo teacherInfo:list){
+				TmmsUser tmmsUser=new TmmsUser();
+				tmmsUser.setUsername(teacherInfo.getTeacherNo());
+				tmmsUser.setPassword("123456");
+				tmmsUser.setState((byte)1);
+				tmmsUser.setRoleId(4);
+				Date createtime=DateUtil.parseDateTime(DateUtil.getCurrentDateTimeStr());//创建时间
+				tmmsUser.setCreateTime(createtime);
+				tmmsUser.setUpdateTime(createtime);
+				tmmsUserMapper.insert(tmmsUser);
+			}
 			teacherInfoMapper.insertTeacherBatch(list);//批量插入数据
 		}
 	}
@@ -233,7 +247,15 @@ public class TeacherServiceImpl implements TeacherService {
 	 */
 	@Override
 	public int insertTeacher(TeacherInfo teacherInfo) {
-		// TODO Auto-generated method stub
+		TmmsUser tmmsUser=new TmmsUser();
+		tmmsUser.setUsername(teacherInfo.getTeacherNo());
+		tmmsUser.setPassword("123456");
+		tmmsUser.setState((byte)1);
+		tmmsUser.setRoleId(4);
+		Date createtime=DateUtil.parseDateTime(DateUtil.getCurrentDateTimeStr());//创建时间
+		tmmsUser.setCreateTime(createtime);
+		tmmsUser.setUpdateTime(createtime);
+		tmmsUserMapper.insert(tmmsUser);
 		return teacherInfoMapper.insertSelective(teacherInfo);
 
 	}

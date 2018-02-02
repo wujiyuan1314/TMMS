@@ -93,12 +93,9 @@
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
-												</a>&nbsp;&nbsp; <a
-													href="codeCatalogsdel">
-													<button class="btn btn-danger btn-sm">
-														<span class="icon-trash"></span>&nbsp;&nbsp;删除
-													</button>
-												</a>
+												</a>&nbsp;&nbsp;  <button class="btn btn-danger btn-sm" onclick="batchDelete('class');">
+													<span class="icon-trash"></span>&nbsp;&nbsp;删除
+												</button>
 											</div>
 										</div>
 										</div>
@@ -109,7 +106,7 @@
 											<thead>
 												<tr>
 													<th class="center"><input type="checkbox" id="all"
-														onclick="selectAll('studentId')" /></th>
+														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
 													<th>参数编码</th>
 													<th>参数名</th>
@@ -122,7 +119,7 @@
 												<c:forEach items="${codeCatalogs}" var="codeCatalog" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="codeCatalogId" value="${codeCatalog.codeno}" /></td>
+															name="Id" value="${codeCatalog.codeno}" /></td>
 														<td>${status.index + 1}</td>
 														<td>${codeCatalog.codeno}</td>
 														<td>${codeCatalog.codename}</td>

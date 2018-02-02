@@ -118,11 +118,17 @@ public class MenuitemController {
       * @param ids
       * @return
       */
-      @RequestMapping(value="/menuitemsdel")
-  	public String menuitem(int ids[]){
-    	  menuitemService.deleteMenuitems(ids);
-  		return "menuitem/menuitem_list";
-  	}
+     @RequestMapping(value="/dels")
+   	 public String dels(HttpServletRequest request){
+     	String ids=request.getParameter("ids");
+     	String idArray[]=ids.split(",");
+     	int[] idArray1=new int[idArray.length];
+     	for(int i=0;i<idArray.length;i++){
+     		idArray1[i]=Function.getInt(idArray[i], 0);
+     	}
+     	menuitemService.deleteMenuitems(idArray1);;
+   		return "redirect:/book/books";
+   	 }
 	  /**
 	   * 按照父ID查找菜单
 	   * @param request

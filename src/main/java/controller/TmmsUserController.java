@@ -22,6 +22,7 @@ import entity.TmmsUser;
 import service.TmmsUserService;
 import service.UserRoleService;
 import util.DateUtil;
+import util.Function;
 import util.Page;
 
 @Controller
@@ -47,6 +48,8 @@ public class TmmsUserController {
 		logger.info(tmmsUser.toString());
 		List<TmmsUser> tmmsusers = tmmsUserService.listTmmsUser(tmmsUser, page);
 		model.addAttribute("tmmsusers",tmmsusers);
+		List<UserRole> userroles=userRoleService.selectAll();
+		model.addAttribute("userroles",userroles);
 		return "tmmsuser/tmmsuser_list";
 	}
 	/**
@@ -136,6 +139,34 @@ public class TmmsUserController {
 		return "redirect:tmmsusers";
 	}
     /**
+	 * 跳转用户修改密码界面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/{id}/editpwd",method=RequestMethod.GET)
+	public String editPWDUI(Model model,@PathVariable int id){
+		TmmsUser tmmsUser=tmmsUserService.getTmmsUserByID(id);
+		model.addAttribute(tmmsUser);
+		return "tmmsuser/tmmsuser_editpwd";
+	}
+	 /**
+    * 修改用户信息
+    * @param tmmsUser
+    * @param br
+    * @return
+    */
+    @RequestMapping(value="/editpwd",method=RequestMethod.POST)
+	public String editPWD(Model model,@Validated TmmsUser tmmsUser,BindingResult br){
+    	if(br.hasErrors()){
+    		return "tmmsuser/tmmsuser_editpwd";
+    	}
+    	TmmsUser tmmsUser1=tmmsUserService.getTmmsUserByID(tmmsUser.getId());
+    	tmmsUser1.setState((byte) 1);
+    	tmmsUser1.setPassword(tmmsUser.getPassword());
+    	int isOk=tmmsUserService.editTmmsUser(tmmsUser1);
+		return "tmmsuser/tmmsuser_editpwd";
+	}
+    /**
      * 删除用户信息
      * @param user
      * @param br
@@ -151,9 +182,15 @@ public class TmmsUserController {
       * @param ids
       * @return
       */
-      @RequestMapping(value="/tmmsusersdel")
-  	public String deltmmsusers(int ids[]){
-    	  tmmsUserService.deleteTmmsUsers(ids);
-  		return "tmmsuser/tmmsuser_list";
-  	}
+     @RequestMapping(value="/dels")
+   	 public String dels(HttpServletRequest request){
+     	String ids=request.getParameter("ids");
+     	String idArray[]=ids.split(",");
+     	int[] idArray1=new int[idArray.length];
+     	for(int i=0;i<idArray.length;i++){
+     		idArray1[i]=Function.getInt(idArray[i], 0);
+     	}
+     	tmmsUserService.deleteTmmsUsers(idArray1);;
+   		return "redirect:/book/books";
+   	}
 }

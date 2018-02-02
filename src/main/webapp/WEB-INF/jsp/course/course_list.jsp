@@ -128,28 +128,34 @@
 
 										<div class="col-sm-4">
 											<div id="dynamic-table_filter" class="dataTables_filter">
+											<shiro:hasPermission name="course:add">
 												<a href="courseadd">
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
-												</a>&nbsp;&nbsp; <a
-													href="coursesdel">
-													<button class="btn btn-danger btn-sm">
-														<span class="icon-trash"></span>&nbsp;&nbsp;删除
-													</button>
-												</a>
+												</a>&nbsp;&nbsp;
+												</shiro:hasPermission>
+												<shiro:hasPermission name="course:dels">
+												 <button class="btn btn-danger btn-sm" onclick="batchDelete('course');">
+													<span class="icon-trash"></span>&nbsp;&nbsp;删除
+												</button>
+												</shiro:hasPermission>
 											</div>
 										</div>
 										
 											<div class="col-sm-1">
 												<input type="button" id="courses" value="查 询" />
 											</div>
+											<shiro:hasPermission name="course:addbatch">
 											<div class="col-sm-1">
 												<input type="button" id="courseaddbatch" value="导入" />
 											</div>
+											</shiro:hasPermission>
+											<shiro:hasPermission name="course:export">
 											<div class="col-sm-1">
 												<input type="button" id="courseexport" value="导出" />
 											</div>
+											</shiro:hasPermission>
 										</div>
 									</div>
 
@@ -158,7 +164,7 @@
 											<thead>
 												<tr>
 													<th class="center"><input type="checkbox" id="all"
-														onclick="selectAll('studentId')" /></th>
+														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
 													<th>学院</th>
 													<th>专业</th>
@@ -175,7 +181,7 @@
 												<c:forEach items="${courses}" var="course" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="courseId" value="${course.id}" /></td>
+															name="Id" value="${course.id}" /></td>
 														<td>${status.index + 1}</td>
 														<td><location:collegeName collegeId="${course.collegeId}" ></location:collegeName></td>
 														<td><location:specialtyName specialtyId="${course.specialtyId}"></location:specialtyName></td>
@@ -188,11 +194,17 @@
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> <a class="green" href="${course.id}/courseedit">修改<i
+																</a>
+																<shiro:hasPermission name="course:edit">
+																 <a class="green" href="${course.id}/courseedit">修改<i
 																	class="icon-edit"></i>
-																</a> <a class="red" href="${course.id}/coursedel">删除<i
+																</a>
+																</shiro:hasPermission>
+																<shiro:hasPermission name="course:del">
+																 <a class="red" href="${course.id}/coursedel">删除<i
 																	class="icon-trash"></i>
 																</a>
+																</shiro:hasPermission>
 															</div>
 														</td>
 													</tr>

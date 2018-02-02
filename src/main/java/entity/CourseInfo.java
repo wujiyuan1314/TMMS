@@ -5,7 +5,15 @@ import java.util.Date;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class CourseInfo {
-    private Integer id;
+    @Override
+	public String toString() {
+		return "CourseInfo [id=" + id + ", courseNo=" + courseNo + ", courseName=" + courseName + ", courseGrade="
+				+ courseGrade + ", courseTerm=" + courseTerm + ", collegeId=" + collegeId + ", specialtyId="
+				+ specialtyId + ", courseKind=" + courseKind + ", createtime=" + createtime + ", updatetime="
+				+ updatetime + ", extend1=" + extend1 + ", extend2=" + extend2 + ", extend3=" + extend3 + "]";
+	}
+
+	private Integer id;
 
     private String courseNo;
 

@@ -19,7 +19,7 @@ public interface StudentInfoMapper {
     int updateByPrimaryKeySelective(StudentInfo record);
 
     int updateByPrimaryKey(StudentInfo record);
- // 下面为自定义方法
+    // 下面为自定义方法
  	List<StudentInfo> listStudent(@Param("studentInfo") StudentInfo studentInfo, @Param("page") Page page);
  	//按条件查询学生信息
     List<StudentInfo> selectByParams(@Param("studentInfo") StudentInfo studentInfo);
@@ -27,4 +27,6 @@ public interface StudentInfoMapper {
  	int countStudent(StudentInfo studentInfo);
  	//批量插入学生信息
  	void insertStudentInfoBatch(List<StudentInfo> list);
+ 	
+ 	StudentInfo selectByStuNo(String studentNo);
 }

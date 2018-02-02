@@ -70,6 +70,10 @@
 								        <td>类别名称:</td>
 								        <td><sf:input path="itemname"/><sf:errors path="itemname" cssClass="errors" style="color:red;"></sf:errors> </td>
 								      </tr>
+								       <tr>
+								        <td>类别值:</td>
+								        <td><sf:input path="extend1"/><sf:errors path="extend1" cssClass="errors" style="color:red;"></sf:errors> </td>
+								      </tr>
 								      <tr>
 								        <td></td>
 								        <td><input type="submit" value="提交"></td>

@@ -26,6 +26,7 @@ import service.CollegeService;
 import service.TeacherService;
 import util.DateUtil;
 import util.FileUploadUtils;
+import util.Function;
 import util.Page;
 
 @Controller
@@ -147,7 +148,7 @@ public class TeacherController {
         if(list.size()>0){
         	teacherService.exportTeacher(list, response);
         }
-    	return "teacher/teacher_list";
+    	return null;
     }
    /**
     * 修改教职工信息
@@ -184,9 +185,15 @@ public class TeacherController {
       * @return
       */
 	@RequiresPermissions({"teacher:dels"})
-      @RequestMapping(value="/teachersdel")
-  	public String delTeachers(int ids[]){
-    	  teacherService.deleteTeachers(ids);
-  		return "teacher/teacher_list";
+	 @RequestMapping(value="/dels")
+  	public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	int[] idArray1=new int[idArray.length];
+    	for(int i=0;i<idArray.length;i++){
+    		idArray1[i]=Function.getInt(idArray[i], 0);
+    	}
+    	teacherService.deleteTeachers(idArray1);;
+  		return "redirect:/book/books";
   	}
 }

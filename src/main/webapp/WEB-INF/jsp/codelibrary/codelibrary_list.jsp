@@ -74,6 +74,7 @@
 										<tr>
 											<th>类别编号</th>
 											<th>类别名</th>
+											<th>类别值</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -83,6 +84,7 @@
 											<tr>
 												<td>${codeLibrary.itemno}</td>
 												<td>${codeLibrary.itemname}</td>
+												<td>${codeLibrary.extend1}</td>
 												<td>
 													<div class="hidden-sm hidden-xs action-buttons">
 														<a class="blue" href="#"> <i

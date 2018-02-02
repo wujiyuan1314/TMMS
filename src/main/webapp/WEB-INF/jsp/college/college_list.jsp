@@ -97,26 +97,32 @@
 											<div class="col-sm-1">
 												<input type="button" id="colleges" value="查 询" />
 											</div>
+											<shiro:hasPermission name="college:addbatch">
 											<div class="col-sm-1">
 												<input type="button" id="collegeaddbatch" value="导入" />
 											</div>
+											</shiro:hasPermission>
+											<shiro:hasPermission name="college:export">
 											<div class="col-sm-1">
 												<input type="button" id="collegeexport" value="导出" />
 											</div>
+											</shiro:hasPermission>
 										</div>
 										
 										<div class="col-sm-4">
 											<div id="dynamic-table_filter" class="dataTables_filter">
+											<shiro:hasPermission name="college:add">
 												<a href="collegeadd">
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
-												</a>&nbsp;&nbsp; <a
-													href="collegesdel">
-													<button class="btn btn-danger btn-sm">
-														<span class="icon-trash"></span>&nbsp;&nbsp;删除
-													</button>
-												</a>
+												</a>&nbsp;&nbsp;
+												</shiro:hasPermission>
+												<shiro:hasPermission name="college:dels">
+												<button class="btn btn-danger btn-sm" onclick="batchDelete('college');">
+													<span class="icon-trash"></span>&nbsp;&nbsp;删除
+												</button>
+												</shiro:hasPermission>
 											</div>
 										</div>
 									</div>
@@ -126,7 +132,7 @@
 											<thead>
 												<tr>
 													<th class="center"><input type="checkbox" id="all"
-														onclick="selectAll('collegeId')" /></th>
+														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
 													<th>院系名</th>
 													<th>院系负责人</th>
@@ -139,7 +145,7 @@
 												<c:forEach items="${colleges}" var="college" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="collegeId" value="${college.collegeId}" /></td>
+															name="Id" value="${college.collegeId}" /></td>
 														<td>${status.index + 1}</td>
 														<td>${college.collegeName}</td>
 														<td>${college.collegePrincipal}</td>
@@ -148,11 +154,16 @@
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> <a class="green" href="${college.collegeId}/collegeedit">修改 <i
+																</a> <shiro:hasPermission name="college:edit">
+																<a class="green" href="${college.collegeId}/collegeedit">修改 <i
 																	class="icon-edit"></i>
-																</a> <a class="red" href="${college.collegeId}/collegedel">删除 <i
+																</a>
+																</shiro:hasPermission>
+																<shiro:hasPermission name="college:del">
+																 <a class="red" href="${college.collegeId}/collegedel">删除 <i
 																	class="icon-trash"></i>
 																</a>
+																</shiro:hasPermission>
 															</div>
 														</td>
 													</tr>

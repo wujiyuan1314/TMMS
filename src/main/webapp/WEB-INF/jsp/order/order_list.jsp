@@ -45,7 +45,7 @@
 
 						<ul class="breadcrumb">
 							<li><i class="icon-home home-icon"></i> <a href="#">首页</a></li>
-							<li class="active">教材书目</li>
+							<li class="active">学生选书界面</li>
 						</ul>
 						<!-- .breadcrumb -->
 					</div>
@@ -55,79 +55,26 @@
 						<div class="row">
 							<div class="col-xs-12">
 
-								<sf:form action="books" method="post" id="Paramform"
+								<sf:form action="selectOtherOrder" method="post" id="Paramform"
 									class="form-horizontal">
 									<input type="hidden" name="currentPage" id="currentPage" value="1" />
-									<div class=" col-xs-12 table-header">书籍列表</div>
-									<div class="form-group col-sm-2">
-										<label> 每页条数 <select name="pageNumber">
-												<option value="10"
-													<c:if test="${page.pageNumber == 10}"> selected="selected"</c:if>>10</option>
-												<option value="25"
-													<c:if test="${page.pageNumber == 25}"> selected="selected"</c:if>>25</option>
-												<option value="50"
-													<c:if test="${page.pageNumber == 50}"> selected="selected"</c:if>>50</option>
-												<option value="100"
-													<c:if test="${page.pageNumber == 100}"> selected="selected"</c:if>>100</option>
-										</select>
-										</label>
-									</div>
+									<div class=" col-xs-12 table-header">选书列表</div>
 									<div class="form-group">
-										<label class="col-sm-1 contorl-label text-right">ISBN编号</label>
-										<div class="col-sm-2">
-											<input type="text" class="col-xs-12" id="isbn"
-												name="bookIsbn" value="${bookInfo.bookIsbn }">
-										</div>
 
-										<label class="col-sm-1 text-right">书籍名称</label>
+										<label class="col-sm-1 text-right">学院</label> 
 										<div class="col-sm-2">
-											<input type="text" class="col-xs-12" name="bookName"
-												value="${bookInfo.bookName }">
-										</div>
-
-										<div class="col-sm-4">
-											<div id="dynamic-table_filter" class="dataTables_filter">
-											    <shiro:hasPermission name="book:add">
-												<a href="bookadd">
-													<button type="button" class="btn btn-success btn-sm">
-														<span class="icon-plus"></span>&nbsp;&nbsp;新增
-													</button>
-												</a>&nbsp;&nbsp; 
-												</shiro:hasPermission>
-												<shiro:hasPermission name="book:dels">
-												<button class="btn btn-danger btn-sm" onclick="batchDelete('book');">
-													<span class="icon-trash"></span>&nbsp;&nbsp;删除
-												</button>
-												</shiro:hasPermission>
-												
-											</div>
+										  <select name="extend1" id="extend1">
+										     <c:forEach items="${codeLibrarys}" var="codeLibrary" varStatus="status">
+										      <option value="${codeLibrary.itemno }">${codeLibrary.itemname }</option>
+										     </c:forEach>
+								           </select>
 										</div>
 										
-										<div class="col-xs-12">
-											<label class="col-sm-1 contorl-label text-right">出版社</label> 
-											<div class="col-sm-2">
-												<input type="text" class="form-control input-sm" name="bookPublish" value="${bookInfo.bookPublish }">
-											</div> 
-											<label class="col-sm-1 text-right">作者</label> 
-											<div class="col-sm-2">
-												<input type="text" class="form-control input-sm" name="bookAuthor"
-													value="${bookInfo.bookAuthor }">
+										 <div class="col-xs-12">
+										    <div class="col-sm-1">
+												<input type="button" id="selectOtherOrder" value="查 询" />
 											</div>
-											
-											<div class="col-sm-1">
-												<input type="button" id="books" value="查 询" />
-											</div>
-											<shiro:hasPermission name="book:addbatch">
-											<div class="col-sm-1">
-												<input type="button" id="bookaddbatch" value="导入" />
-											</div>
-											</shiro:hasPermission>
-											<shiro:hasPermission name="book:export">
-											<div class="col-sm-1">
-												<input type="button" id="bookexport" value="导出" />
-											</div>
-											</shiro:hasPermission>
-										</div>
+									     </div>
 									</div>
 
 									<table id="dynamic-table"
@@ -137,42 +84,33 @@
 													<th class="center"><input type="checkbox" id="all"
 														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
-													<th>ISBN号</th>
-													<th>书名</th>
-													<th>出版社</th>
-													<th>作者</th>
-													<th>价格</th>
+													<th>学生</th>
+													<th>所选书名</th>
+													<th>院系</th>
+													<th>专业</th>
+													<th>班级</th>
 													<th>操作</th>
 												</tr>
 											</thead>
 
 											<tbody>
-												<c:forEach items="${books}" var="book" varStatus="status">
+												<c:forEach items="${stuChooseBooks}" var="stuChooseBook" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="Id" value="${book.id}" /></td>
+															name="Id" value="${stuChooseBook.id}" /></td>
 														<td>${status.index + 1}</td>
-														<td>${book.bookIsbn}</td>
-														<td>${book.bookName}</td>
-														<td>${book.bookPublish}</td>
-														<td>${book.bookAuthor}</td>
-														<td>${book.bookPrice}</td>
+														<td>${stuChooseBook.extend2}</td>
+														<td>${stuChooseBook.extend1}</td>
+														<td>${stuChooseBook.extend3}</td>
+														<td>${stuChooseBook.extend4}</td>
+														<td>${stuChooseBook.extend5}</td>
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
-															
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> 
-																<shiro:hasPermission name="book:edit">
-																<a class="green" href="${book.id}/bookedit">修改<i
-																	class="icon-edit"></i>
-																</a> 
-																</shiro:hasPermission>
-																<shiro:hasPermission name="book:del">
-																<a class="red" href="${book.id}/bookdel">删除<i
+																</a>  <a class="red" href="${stuChooseBook.id}/stuchoosebookdel">删除<i
 																	class="icon-trash"></i>
 																</a>
-																</shiro:hasPermission>
 															</div>
 														</td>
 													</tr>
@@ -235,6 +173,7 @@
 	<!-- /.main-container -->
 
 	<%@ include file="../common/common-js.jsp"%>
+	<script src="<%=basePath2 %>resources/js/common/common_list.js"></script>
 </body>
 </html>
 

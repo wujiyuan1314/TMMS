@@ -2,38 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.StuChooseBookMapper">
   <resultMap id="BaseResultMap" type="entity.StuChooseBook">
-    <id column="id" jdbcType="TINYINT" property="id" />
-    <result column="stu_id" jdbcType="TINYINT" property="stuId" />
-    <result column="book_id" jdbcType="TINYINT" property="bookId" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="stu_id" jdbcType="INTEGER" property="stuId" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updata_time" jdbcType="TIMESTAMP" property="updataTime" />
     <result column="extend1" jdbcType="VARCHAR" property="extend1" />
     <result column="extend2" jdbcType="VARCHAR" property="extend2" />
     <result column="extend3" jdbcType="VARCHAR" property="extend3" />
     <result column="extend4" jdbcType="VARCHAR" property="extend4" />
+    <result column="class_id" jdbcType="VARCHAR" property="classId" />
+    <result column="specialty_id" jdbcType="VARCHAR" property="specialtyId" />
+    <result column="college_id" jdbcType="VARCHAR" property="collegeId" />
+    <result column="extend5" jdbcType="VARCHAR" property="extend5" />
+    <result column="extend6" jdbcType="VARCHAR" property="extend6" />
+    <result column="extend7" jdbcType="VARCHAR" property="extend7" />
+    <result column="extend8" jdbcType="VARCHAR" property="extend8" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, stu_id, book_id, create_time, updata_time, extend1, extend2, extend3, extend4
+    id, stu_id, book_id, create_time, updata_time, extend1, extend2, extend3, extend4, 
+    class_id, specialty_id, college_id, extend5, extend6, extend7, extend8
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from stu_choose_book
-    where id = #{id,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from stu_choose_book
-    where id = #{id,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="entity.StuChooseBook">
     insert into stu_choose_book (id, stu_id, book_id, 
       create_time, updata_time, extend1, 
-      extend2, extend3, extend4
-      )
-    values (#{id,jdbcType=TINYINT}, #{stuId,jdbcType=TINYINT}, #{bookId,jdbcType=TINYINT}, 
+      extend2, extend3, extend4, 
+      class_id, specialty_id, college_id, 
+      extend5, extend6, extend7, 
+      extend8)
+    values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updataTime,jdbcType=TIMESTAMP}, #{extend1,jdbcType=VARCHAR}, 
-      #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR}
-      )
+      #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR}, 
+      #{classId,jdbcType=VARCHAR}, #{specialtyId,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, 
+      #{extend5,jdbcType=VARCHAR}, #{extend6,jdbcType=VARCHAR}, #{extend7,jdbcType=VARCHAR}, 
+      #{extend8,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="entity.StuChooseBook">
     insert into stu_choose_book
@@ -65,16 +77,37 @@
       <if test="extend4 != null">
         extend4,
       </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="specialtyId != null">
+        specialty_id,
+      </if>
+      <if test="collegeId != null">
+        college_id,
+      </if>
+      <if test="extend5 != null">
+        extend5,
+      </if>
+      <if test="extend6 != null">
+        extend6,
+      </if>
+      <if test="extend7 != null">
+        extend7,
+      </if>
+      <if test="extend8 != null">
+        extend8,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=TINYINT},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="stuId != null">
-        #{stuId,jdbcType=TINYINT},
+        #{stuId,jdbcType=INTEGER},
       </if>
       <if test="bookId != null">
-        #{bookId,jdbcType=TINYINT},
+        #{bookId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -94,16 +127,37 @@
       <if test="extend4 != null">
         #{extend4,jdbcType=VARCHAR},
       </if>
+      <if test="classId != null">
+        #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialtyId != null">
+        #{specialtyId,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null">
+        #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null">
+        #{extend5,jdbcType=VARCHAR},
+      </if>
+      <if test="extend6 != null">
+        #{extend6,jdbcType=VARCHAR},
+      </if>
+      <if test="extend7 != null">
+        #{extend7,jdbcType=VARCHAR},
+      </if>
+      <if test="extend8 != null">
+        #{extend8,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="entity.StuChooseBook">
     update stu_choose_book
     <set>
       <if test="stuId != null">
-        stu_id = #{stuId,jdbcType=TINYINT},
+        stu_id = #{stuId,jdbcType=INTEGER},
       </if>
       <if test="bookId != null">
-        book_id = #{bookId,jdbcType=TINYINT},
+        book_id = #{bookId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -123,46 +177,124 @@
       <if test="extend4 != null">
         extend4 = #{extend4,jdbcType=VARCHAR},
       </if>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialtyId != null">
+        specialty_id = #{specialtyId,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null">
+        college_id = #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null">
+        extend5 = #{extend5,jdbcType=VARCHAR},
+      </if>
+      <if test="extend6 != null">
+        extend6 = #{extend6,jdbcType=VARCHAR},
+      </if>
+      <if test="extend7 != null">
+        extend7 = #{extend7,jdbcType=VARCHAR},
+      </if>
+      <if test="extend8 != null">
+        extend8 = #{extend8,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="entity.StuChooseBook">
     update stu_choose_book
-    set stu_id = #{stuId,jdbcType=TINYINT},
-      book_id = #{bookId,jdbcType=TINYINT},
+    set stu_id = #{stuId,jdbcType=INTEGER},
+      book_id = #{bookId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       updata_time = #{updataTime,jdbcType=TIMESTAMP},
       extend1 = #{extend1,jdbcType=VARCHAR},
       extend2 = #{extend2,jdbcType=VARCHAR},
       extend3 = #{extend3,jdbcType=VARCHAR},
-      extend4 = #{extend4,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=TINYINT}
+      extend4 = #{extend4,jdbcType=VARCHAR},
+      class_id = #{classId,jdbcType=VARCHAR},
+      specialty_id = #{specialtyId,jdbcType=VARCHAR},
+      college_id = #{collegeId,jdbcType=VARCHAR},
+      extend5 = #{extend5,jdbcType=VARCHAR},
+      extend6 = #{extend6,jdbcType=VARCHAR},
+      extend7 = #{extend7,jdbcType=VARCHAR},
+      extend8 = #{extend8,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <!-- 一下为自定义方法 -->
+   <!-- 一下为自定义方法 -->
   <select id="listStuChooseBook" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
   	from stu_choose_book
   	<where>
-  		<if test="stuChooseBook.stuId != null and !&quot;&quot;.equals(stuChooseBook.stuId.trim())">
+  		<if test="stuChooseBook.stuId != null">
   			and stu_id = #{stuChooseBook.stuId}
   		</if>
-  		<if test="stuChooseBook.bookId != null and !&quot;&quot;.equals(stuChooseBook.bookId.trim())">
+  		<if test="stuChooseBook.bookId != null">
   			and book_id = #{stuChooseBook.bookId}
+  		</if>
+  		<if test="stuChooseBook.classId != null and !&quot;&quot;.equals(stuChooseBook.classId.trim())">
+  			and class_id = #{stuChooseBook.classId}
+  		</if>
+  		<if test="stuChooseBook.specialtyId != null and !&quot;&quot;.equals(stuChooseBook.specialtyId.trim())">
+  			and specialty_id = #{stuChooseBook.specialtyId}
+  		</if>
+  		<if test="stuChooseBook.collegeId != null and !&quot;&quot;.equals(stuChooseBook.collegeId.trim())">
+  			and college_id = #{stuChooseBook.collegeId}
   		</if>
   	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
   	
   </select>
   
-  <select id="countStuChooseBook" resultType="int" parameterType="entity.StuChooseBook">
+  <select id="countStuChooseBook" parameterType="entity.StuChooseBook" resultType="int">
   	select count(*) from stu_choose_book
   	<where>
-  		<if test="stuId != null and !&quot;&quot;.equals(stuId.trim())">
+  		<if test="stuId != null">
   			and stu_id = #{stuId}
   		</if>
-  		<if test="bookId != null and !&quot;&quot;.equals(bookId.trim())">
+  		<if test="bookId != null">
   			and book_id = #{bookId}
   		</if>
+  		<if test="classId != null and !&quot;&quot;.equals(classId.trim())">
+  			and class_id = #{classId}
+  		</if>
+  		<if test="specialtyId != null and !&quot;&quot;.equals(specialtyId.trim())">
+  			and specialty_id = #{specialtyId}
+  		</if>
+  		<if test="collegeId != null and !&quot;&quot;.equals(collegeId.trim())">
+  			and college_id = #{collegeId}
+  		</if>
   	</where>
+  </select>
+  
+   <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from stu_choose_book
+  	<where>
+  	    <if test="stuChooseBook.stuId != null">
+  			and stu_id = #{stuChooseBook.stuId}
+  		</if>
+  		<if test="stuChooseBook.bookId != null">
+  			and book_id = #{stuChooseBook.bookId}
+  		</if>
+  		<if test="stuChooseBook.classId != null">
+  			and class_id = #{stuChooseBook.classId}
+  		</if>
+  		<if test="stuChooseBook.specialtyId != null and !&quot;&quot;.equals(stuChooseBook.specialtyId.trim())">
+  			and specialty_id = #{stuChooseBook.specialtyId}
+  		</if>
+  		<if test="stuChooseBook.collegeId != null and !&quot;&quot;.equals(stuChooseBook.collegeId.trim())">
+  			and college_id = #{stuChooseBook.collegeId}
+  		</if>
+  	</where>
+  </select>
+  
+   <select id="selectByStuBook" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stu_choose_book where 
+  			 stu_id = #{stuId,jdbcType=INTEGER}
+  			and book_id = #{bookId,jdbcType=INTEGER}
+  		
   </select>
 </mapper>

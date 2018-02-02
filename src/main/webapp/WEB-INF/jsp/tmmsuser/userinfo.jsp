@@ -67,7 +67,11 @@
 								      </tr>
 								      <tr>
 								        <td>角色:</td>
-								        <td>${tmmsUser.roleId }</td>
+								        <td><c:forEach items="${userroles}" var="userrole" varStatus="status">
+															 <c:if test="${userrole.id==tmmsUser.roleId }">
+														        ${userrole.roleName }
+														    </c:if>
+															</c:forEach></td>
 								        </td>
 								      </tr>
 									</table>

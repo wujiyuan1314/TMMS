@@ -96,26 +96,32 @@
 											<div class="col-sm-1">
 												<input type="button" id="specialtys" value="查 询" />
 											</div>
+											<shiro:hasPermission name="specialty:addbatch">
 											<div class="col-sm-1">
 												<input type="button" id="specialtyaddbatch" value="导入" />
 											</div>
+											</shiro:hasPermission>
+											<shiro:hasPermission name="specialty:export">
 											<div class="col-sm-1">
 												<input type="button" id="specialtyexport" value="导出" />
 											</div>
+											</shiro:hasPermission>
 										</div>
 										
 										<div class="col-sm-4">
 											<div id="dynamic-table_filter" class="dataTables_filter">
+											<shiro:hasPermission name="specialty:add">
 												<a href="specialtyadd">
 													<button type="button" class="btn btn-success btn-sm">
 														<span class="icon-plus"></span>&nbsp;&nbsp;新增
 													</button>
-												</a>&nbsp;&nbsp; <a
-													href="specialtysdel">
-													<button class="btn btn-danger btn-sm">
-														<span class="icon-trash"></span>&nbsp;&nbsp;删除
-													</button>
-												</a>
+												</a>&nbsp;&nbsp;
+												</shiro:hasPermission>
+												<shiro:hasPermission name="specialty:dels">
+												<button class="btn btn-danger btn-sm" onclick="batchDelete('specialty');">
+													<span class="icon-trash"></span>&nbsp;&nbsp;删除
+												</button>
+												</shiro:hasPermission>
 											</div>
 										</div>
 									</div>
@@ -125,7 +131,7 @@
 											<thead>
 												<tr>
 													<th class="center"><input type="checkbox" id="all"
-														onclick="selectAll('specialtyId')" /></th>
+														onclick="selectAll('Id')" /></th>
 													<th>序号</th>
 													<th>专业名</th>
 													<th>学制</th>
@@ -138,7 +144,7 @@
 												<c:forEach items="${specialtys}" var="specialty" varStatus="status">
 													<tr>
 														<td class="center"><input type="checkbox"
-															name="specialtyId" value="${specialty.specialtyId}" /></td>
+															name="Id" value="${specialty.specialtyId}" /></td>
 														<td>${status.index + 1}</td>
 														<td>${specialty.specialtyName}</td>
 														<td>${specialty.schsys	}</td>
@@ -147,11 +153,17 @@
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#"> <i
 																	class="ace-icon fa fa-search-plus bigger-130"></i>
-																</a> <a class="green" href="${specialty.specialtyId}/specialtyedit">修改 <i
+																</a>
+																<shiro:hasPermission name="specialty:edit">
+																 <a class="green" href="${specialty.specialtyId}/specialtyedit">修改 <i
 																	class="icon-edit"></i>
-																</a> <a class="red" href="${specialty.specialtyId}/specialtydel">删除 <i
+																</a>
+																</shiro:hasPermission>
+																<shiro:hasPermission name="specialty:del">
+																 <a class="red" href="${specialty.specialtyId}/specialtydel">删除 <i
 																	class="icon-trash"></i>
 																</a>
+																</shiro:hasPermission>
 															</div>
 														</td>
 													</tr>

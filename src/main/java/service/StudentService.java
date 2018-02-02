@@ -69,4 +69,10 @@ public interface StudentService {
 	 * @return
 	 */
 	StudentInfo getStudentByID(int id);
+	/**
+	 * 根据学号查询学生
+	 * @param studentNo
+	 * @return
+	 */
+	StudentInfo selectByStuNo(String studentNo);
 }

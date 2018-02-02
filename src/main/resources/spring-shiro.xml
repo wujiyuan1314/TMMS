@@ -54,6 +54,8 @@
         <property name="filterChainDefinitions">
          <!-- 拦截顺序是按照写的顺序从上到下,拦截后就不再往下执行 -->
             <value>
+                /stuchoosebook/selectOtherOrder= anon
+                /stuchoosebook/otherOrders= anon
                 <!-- 某个角色的访问权限-->
                 /stu/** = roles[admin]
                 <!-- 静态资源访问权限 -->

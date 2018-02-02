@@ -173,10 +173,12 @@ public class CollegeController {
       * @return
       */
 	@RequiresPermissions({"college:dels"})
-      @RequestMapping(value="/collegesdel")
-  	public String delColleges(String ids[]){
-    	  collegeService.deleteColleges(ids);
-  		return "college/college_list";
+	@RequestMapping(value="/dels")
+  	public String dels(HttpServletRequest request){
+    	String ids=request.getParameter("ids");
+    	String idArray[]=ids.split(",");
+    	collegeService.deleteColleges(idArray);;
+  		return "redirect:/book/books";
   	}
       /**
        * 查找所有学院

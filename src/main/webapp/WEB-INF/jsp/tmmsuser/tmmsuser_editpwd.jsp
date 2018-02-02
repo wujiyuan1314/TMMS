@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="util.*" %>
+<%@page import="util.DateUtil" %>
 <!DOCTYPE html>
 
 <html>
@@ -46,7 +46,7 @@
 
 						<ul class="breadcrumb">
 							<li><i class="icon-home home-icon"></i> <a href="#">首页</a></li>
-							<li class="active">教材书目</li>
+							<li class="active">用户信息</li>
 						</ul>
 						<!-- .breadcrumb -->
 					</div>
@@ -56,45 +56,18 @@
 						<div class="row">
 							<div class="col-xs-12">
 
-								<sf:form action="/tmms/book/bookedit" method="post" id="Paramform"
-									class="form-horizontal" commandName="bookInfo">
-									<div class=" col-xs-12 table-header">书籍修改<a href="/tmms/book/books" style="float:right;color:#fff;">返回书籍列表</a></div>
+								<sf:form action="/tmms/tmmsuser/editpwd" method="post" id="Paramform"
+									class="form-horizontal" commandName="tmmsUser">
+									<div class=" col-xs-12 table-header">用户信息添加<a href="/tmms/tmmsuser/tmmsusers" style="float:right;color:#fff;">返回用户列表</a></div>
                                     <table id="dynamic-table">
                                     <sf:hidden path="id"/>
 								      <tr>
-								        <td>书名:</td>
-								        <td><sf:input path="bookName"/><sf:errors path="bookName" cssClass="errors" style="color:red;"></sf:errors> </td>
+								        <td>用户名:</td>
+								        <td><sf:input path="username" readonly="readonly"/><sf:errors path="username" cssClass="errors" style="color:red;"></sf:errors> </td>
 								      </tr>
 								      <tr>
-								        <td>类型:</td>
-								        <td>
-								            <sf:select path="bookKind" items="${codelist}" itemLabel="itemname" itemValue="itemno">
-								            </sf:select>
-								        </td>
-								      </tr>
-								      <tr>
-								        <td>作者:</td>
-								        <td><sf:input path="bookAuthor"/><sf:errors path="bookAuthor" cssClass="errors" style="color:red;"></sf:errors> </td>
-								      </tr>
-								      <tr>
-								        <td>ISBN:</td>
-								        <td><sf:input path="bookIsbn"/><sf:errors path="bookIsbn" cssClass="errors" style="color:red;"></sf:errors> </td>
-								      </tr>
-								      <tr>
-								        <td>出版社:</td>
-								        <td><sf:input path="bookPublish"/><sf:errors path="bookPublish" cssClass="errors" style="color:red;"></sf:errors> </td>
-								      </tr>
-								      <tr>
-								        <td>出版时间:</td>
-								        <td><sf:input path="bookPublishTime" class="ECalendar" id="ECalendar_date" readonly="true"/><sf:errors path="bookPublishTime" cssClass="errors" style="color:red;"></sf:errors> </td>
-								      </tr>
-								      <tr>
-								        <td>价格:</td>
-								        <td><sf:input path="bookPrice"/><sf:errors path="bookPrice" cssClass="errors" style="color:red;"></sf:errors> </td>
-								      </tr>
-								      <tr>
-								        <td>简介:</td>
-								        <td><sf:textarea path="bookIntro"/></td>
+								        <td>密码:</td>
+								        <td><sf:password path="password"/> <sf:errors path="password" cssClass="errors" style="color:red;"></sf:errors> </td>
 								      </tr>
 								      <tr>
 								        <td></td>
@@ -121,8 +94,8 @@
 		</a>
 	</div>
 	<!-- /.main-container -->
-
-	<%@ include file="../common/common-js.jsp"%>
+<%@ include file="../common/common-js.jsp"%>
+<script src="<%=basePath2 %>resources/js/common/common_edit.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#ECalendar_date").ECalendar({

@@ -73,7 +73,7 @@ public class BookInfo {
         this.bookAuthor = bookAuthor == null ? null : bookAuthor.trim();
     }
     @NotEmpty(message="ISBN不能为空")
-    //@Pattern(regexp="^(\\d[- ]*){9}[\\dxX]$",message="ISBN的格式不正确")
+    @Pattern(regexp="^(\\d[- ]*){9}[\\dxX]$",message="ISBN的格式不正确")
     public String getBookIsbn() {
         return bookIsbn;
     }
